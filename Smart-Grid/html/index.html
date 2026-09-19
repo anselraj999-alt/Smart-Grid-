@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartGrid AI</title>
+
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+
+<body>
+  <!-- LOADING (shown for a moment while an existing login is checked) -->
+  <section id="loadingPage" class="screen">
+    <p class="loading-text">Loading…</p>
+  </section>
+
+  <!-- LOGIN PAGE -->
+  <section id="loginPage" class="screen hidden">
+    <div class="card">
+      <div class="brand">
+        <div class="brand-icon">S</div>
+      </div>
+
+      <h1>Welcome to SmartGrid AI</h1>
+      <p class="subtitle">
+        Smart Renewable Energy Load Forecasting &amp; Grid Management System
+      </p>
+
+      <div class="field">
+        <label for="loginUserId">Customer User ID</label>
+        <input
+          id="loginUserId"
+          type="text"
+          placeholder="Enter your User ID"
+          autocomplete="username"
+        />
+      </div>
+
+      <div class="field">
+        <label for="loginPassword">Password</label>
+        <input
+          id="loginPassword"
+          type="password"
+          placeholder="Enter your password"
+          autocomplete="current-password"
+        />
+      </div>
+
+      <button id="loginButton" class="button primary">Login</button>
+
+      <p class="link-line">
+        New customer?
+        <button id="openRegisterButton" class="link-button">
+          Create New Account
+        </button>
+      </p>
+
+      <div id="loginMessage" class="message"></div>
+
+      <p class="demo-credentials">Demo account: CUSTOMER001 / Demo@123</p>
+    </div>
+  </section>
+
+  <!-- REGISTRATION PAGE -->
+  <section id="registerPage" class="screen hidden">
+    <div class="card register-card">
+      <div class="brand">
+        <div class="brand-icon">S</div>
+      </div>
+
+      <h2>Create New Customer Account</h2>
+      <p class="subtitle">
+        Enter your details and create your SmartGrid customer account.
+      </p>
+
+      <div class="warning-note">
+        Do not enter a real Aadhaar number. Use dummy Aadhaar data for testing.
+      </div>
+
+      <div class="grid-two">
+        <div class="field">
+          <label for="registerName">Name</label>
+          <input id="registerName" type="text" placeholder="Enter full name" />
+        </div>
+
+        <div class="field">
+          <label for="registerAddress">Address</label>
+          <input id="registerAddress" type="text" placeholder="Enter address" />
+        </div>
+
+        <div class="field">
+          <label for="registerEmail">Email ID</label>
+          <input id="registerEmail" type="email" placeholder="example@email.com" />
+        </div>
+
+        <div class="field">
+          <label for="registerAadhaar">Aadhaar Number</label>
+          <input
+            id="registerAadhaar"
+            type="text"
+            placeholder="Use 12 dummy digits"
+            maxlength="14"
+          />
+        </div>
+
+        <div class="field">
+          <label for="registerPhone">Contact Number</label>
+          <input
+            id="registerPhone"
+            type="tel"
+            placeholder="10 digit number"
+            maxlength="10"
+          />
+        </div>
+      </div>
+
+      <div class="user-id-row">
+        <div class="field">
+          <label for="registerUserId">Customer User ID</label>
+          <input
+            id="registerUserId"
+            type="text"
+            placeholder="Create your own User ID"
+          />
+        </div>
+
+        <button id="checkUserIdButton" class="button secondary small-button">
+          Check Availability
+        </button>
+      </div>
+
+      <div class="field">
+        <label for="registerPassword">Password</label>
+        <input
+          id="registerPassword"
+          type="password"
+          placeholder="Create a strong password"
+        />
+
+        <div class="password-meter">
+          <div id="passwordMeterFill" class="password-meter-fill"></div>
+        </div>
+
+        <div id="passwordStatus" class="password-status">Weak</div>
+      </div>
+
+      <div class="field">
+        <label for="registerConfirmPassword">Confirm Password</label>
+        <input
+          id="registerConfirmPassword"
+          type="password"
+          placeholder="Confirm your password"
+        />
+      </div>
+
+      <button id="createAccountButton" class="button primary">
+        Create Account
+      </button>
+
+      <p class="link-line">
+        Already have an account?
+        <button id="backToLoginButton" class="link-button">Back to Login</button>
+      </p>
+
+      <div id="registerMessage" class="message"></div>
+    </div>
+  </section>
+
+  <!-- SUCCESS PAGE -->
+  <section id="successPage" class="screen hidden">
+    <div class="card success-card">
+      <div class="success-icon">✓</div>
+
+      <h2>Account Created Successfully!</h2>
+
+      <p class="subtitle">
+        Your SmartGrid customer account has been created successfully.
+      </p>
+
+      <div id="createdUserId" class="user-id-display">Customer User ID:</div>
+
+      <button id="continueLoginButton" class="button primary">
+        Continue to Login
+      </button>
+    </div>
+  </section>
+
+  <!-- DASHBOARD -->
+  <section id="dashboardPage" class="dashboard hidden">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-icon">S</div>
+        SmartGrid AI
+      </div>
+
+      <div class="nav-item active">Dashboard</div>
+      <div class="nav-item">Load Forecast</div>
+      <div class="nav-item">Renewable Energy</div>
+      <div class="nav-item">Grid Status</div>
+      <div class="nav-item">Demand Forecast</div>
+      <div class="nav-item">Alerts</div>
+      <div class="nav-item">Reports</div>
+      <div class="nav-item">Profile</div>
+      <div class="nav-item">System Architecture</div>
+      <div id="sidebarLogoutButton" class="nav-item">Logout</div>
+    </aside>
+
+    <main class="dashboard-content">
+      <div class="topbar">
+        <h2>Energy Management Overview</h2>
+
+        <div class="topbar-actions">
+          <div id="welcomeMessage" class="welcome">Welcome, Customer</div>
+          <button id="logoutButton" class="button logout">Logout</button>
+        </div>
+      </div>
+
+      <div id="dashboardError" class="dashboard-error hidden"></div>
+
+      <span id="demoLabel" class="demo-label hidden">Demo Data</span>
+
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-label">Current Load</div>
+          <div class="stat-value" data-bind="stat.currentLoad">—</div>
+          <div class="stat-note">Stable</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Predicted Load</div>
+          <div class="stat-value" data-bind="stat.predictedLoad">—</div>
+          <div class="stat-note">Forecasted</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Renewable Energy</div>
+          <div class="stat-value" data-bind="stat.renewable">—</div>
+          <div class="stat-note">Available</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Grid Capacity</div>
+          <div class="stat-value" data-bind="stat.capacity">—</div>
+          <div class="stat-note">Available</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Grid Utilization</div>
+          <div class="stat-value" data-bind="stat.utilization">—</div>
+          <div class="stat-note">Normal</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Overload Risk</div>
+          <div id="overloadRisk" class="stat-value" data-bind="stat.risk">—</div>
+          <div class="stat-note">No critical issue</div>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div>
+          <div class="panel">
+            <h3>AI Load Forecasting</h3>
+
+            <div class="chart">
+              <svg viewBox="0 0 500 200" preserveAspectRatio="none">
+                <polyline id="actualLine" class="line line-actual" points="" />
+                <polyline id="predictedLine" class="line line-predicted" points="" />
+              </svg>
+            </div>
+
+            <p class="chart-legend">
+              Blue: Actual Load &nbsp; | &nbsp; Green: Predicted Load
+            </p>
+
+            <p id="forecastMetrics" class="chart-metrics" data-bind="forecast.metrics"></p>
+          </div>
+
+          <div class="panel">
+            <h3>Renewable Energy Management</h3>
+
+            <div class="metric">
+              <span>Solar</span>
+              <span data-bind="renew.solar">—</span>
+            </div>
+
+            <div class="metric">
+              <span>Wind</span>
+              <span data-bind="renew.wind">—</span>
+            </div>
+
+            <div class="metric">
+              <span>Hydro</span>
+              <span data-bind="renew.hydro">—</span>
+            </div>
+
+            <p class="green-text mix-text" data-bind="renew.mix"></p>
+          </div>
+
+          <div class="panel">
+            <h3>My Profile</h3>
+
+            <div class="profile-row">
+              <strong>Name</strong>
+              <span id="profileName">Customer</span>
+            </div>
+
+            <div class="profile-row">
+              <strong>Customer User ID</strong>
+              <span id="profileUserId">—</span>
+            </div>
+
+            <div class="profile-row">
+              <strong>Email</strong>
+              <span id="profileEmail">—</span>
+            </div>
+
+            <div class="profile-row">
+              <strong>Address</strong>
+              <span id="profileAddress">—</span>
+            </div>
+
+            <div class="profile-row">
+              <strong>Contact Number</strong>
+              <span id="profilePhone">—</span>
+            </div>
+
+            <div class="profile-row">
+              <strong>Aadhaar</strong>
+              <span id="profileAadhaar">—</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="panel">
+            <h3>Grid Load Alerts</h3>
+            <div id="alertsList"></div>
+          </div>
+
+          <div class="panel">
+            <h3>Grid Status</h3>
+
+            <div class="metric">
+              <span>Current Load</span>
+              <span data-bind="grid.load">—</span>
+            </div>
+
+            <div class="metric">
+              <span>Grid Capacity</span>
+              <span data-bind="grid.capacity">—</span>
+            </div>
+
+            <div class="metric">
+              <span>Utilization</span>
+              <span data-bind="grid.utilization">—</span>
+            </div>
+
+            <div class="metric">
+              <span>Frequency</span>
+              <span data-bind="grid.frequency">—</span>
+            </div>
+
+            <div class="metric">
+              <span>Voltage</span>
+              <span data-bind="grid.voltage">—</span>
+            </div>
+
+            <div class="metric">
+              <span>Grid Stability</span>
+              <span id="gridStability" data-bind="grid.stability">—</span>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Energy Reports</h3>
+
+            <div class="metric">
+              <span>Daily Consumption</span>
+              <span data-bind="report.daily">—</span>
+            </div>
+
+            <div class="metric">
+              <span>Weekly Consumption</span>
+              <span data-bind="report.weekly">—</span>
+            </div>
+
+            <div class="metric">
+              <span>Monthly Consumption</span>
+              <span data-bind="report.monthly">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </section>
+
+  <!-- Order matters: config -> api -> app -->
+  <script src="../javascript/config.js"></script>
+  <script src="../javascript/api.js"></script>
+  <script src="../javascript/app.js"></script>
+</body>
+</html>
